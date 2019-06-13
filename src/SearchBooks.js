@@ -9,26 +9,28 @@ class SearchBooks extends Component {
   state = {
     query: '',
     searchedBooks: [],
-    isUsed: false
+    inUse: false
   }
 
- updateQuery = (query) => {
-    this.setState(() => ({ query, isLoading: true }));
-    if (!query) {
-      this.setState(() => ({ searchedBooks: [] }))
-      return;
-    }
-    BooksAPI.search(query).then(books => {
+  updateQuery = (query) => {
+      this.setState(() => ({ query, isLoading: true }))
+
+      if (!query) {
+        this.setState(() => ({ searchedBooks: [] }))
+        return;
+      }
+      BooksAPI.search(query.trim()).then((books) => {
+      books.map(book => (this.props.books.filter((item) => item.id === book.id).map((item) => book.shelf = item.shelf)))
       this.setState(prevState => ({
-        searchedBooks:
-          !prevState.query || !books || books.error === "empty query" ? [] : books,
+        searchedBooks:!prevState.query || !books || books.error === "empty query" ? [] : books,
       }))
     })
   }
 
+
   toggleSearch = () => {
     this.setState({
-      isUsed: !this.state.isUsed
+      inUse: !this.state.inUse
     });
   }
 
@@ -47,7 +49,7 @@ class SearchBooks extends Component {
           </div>
           <button className="info-search-keywords" onClick={this.toggleSearch}></button>
           <InfoSearchKeywords
-            show={this.state.isUsed}
+            show={this.state.isUse}
             onClose={this.toggleSearch}>
                 The following terms  can be used as the Search keyword:
                 'Android', 'Art', 'Artificial Intelligence', 'Astronomy', 'Austen', 'Baseball', 'Basketball',
@@ -68,7 +70,7 @@ class SearchBooks extends Component {
               <AvailableBook
                 book={ searchedbook }
                 key={ searchedbook.id }
-                changeTheShelf={this.props.changeTheShelf}
+                changeTheShelf={ this.props.changeTheShelf }
               />
             ))}
           </ol>

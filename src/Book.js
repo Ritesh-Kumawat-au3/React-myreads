@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import coverNotAvailable from './icons/no-cover.jpg'
+import coverNotAvailable from './icons/no-cover.jpg' //default cover when BookAPI isn't having cover for a particular Book
 
 class Book extends Component {
 

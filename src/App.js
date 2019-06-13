@@ -22,7 +22,7 @@ class BrainFood extends Component {
     BooksAPI.getAll().then((books) => this.setState({ books: books }));
   }
 
-
+  //To update the book status
   changeTheShelf = (bookID, event) => {
     BooksAPI.update(bookID, event.target.value).then(()=> {
       BooksAPI.getAll().then((books) => this.setState({ books: books }));
@@ -37,6 +37,7 @@ class BrainFood extends Component {
 
     return (
       <div className="app">
+
       {
       /* React Router will render as following when the url path matches "/" exactly
       The Route component is a critical piece of building an application with React Router
@@ -49,6 +50,7 @@ class BrainFood extends Component {
            when the url path matches "/search"
        */
       }
+
         <Route exact path="/" render={() => (
           <div className="list-Of-books">
             <div className="list-Of-books-title">
