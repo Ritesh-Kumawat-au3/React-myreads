@@ -13,7 +13,7 @@ class SearchBooks extends Component {
   }
 
   updateQuery = (query) => {
-      this.setState(() => ({ query, isLoading: true }))
+      this.setState(() => ({ query }))
 
       if (!query) {
         this.setState(() => ({ searchedBooks: [] }))
@@ -21,7 +21,7 @@ class SearchBooks extends Component {
       }
       BooksAPI.search(query.trim()).then((books) => {
       books.map(book => (this.props.books.filter((item) => item.id === book.id).map((item) => book.shelf = item.shelf)))
-      this.setState(prevState => ({
+      &&this.setState(prevState => ({
         searchedBooks:!prevState.query || !books || books.error === "empty query" ? [] : books,
       }))
     })
@@ -49,7 +49,7 @@ class SearchBooks extends Component {
           </div>
           <button className="info-search-keywords" onClick={this.toggleSearch}></button>
           <InfoSearchKeywords
-            show={this.state.isUse}
+            show={this.state.inUse}
             onClose={this.toggleSearch}>
                 The following terms  can be used as the Search keyword:
                 'Android', 'Art', 'Artificial Intelligence', 'Astronomy', 'Austen', 'Baseball', 'Basketball',
