@@ -19,10 +19,15 @@ class SearchBooks extends Component {
         this.setState(() => ({ searchedBooks: [] }))
         return;
       }
+
       BooksAPI.search(query.trim()).then((books) => {
+        if (books.error) {
+          this.setState(() => ({ searchedBooks: [] }));
+          return
+       }
       books.map(book => (this.props.books.filter((item) => item.id === book.id).map((item) => book.shelf = item.shelf)))
       &&this.setState(prevState => ({
-        searchedBooks:!prevState.query || !books || books.error === "empty query" ? [] : books,
+        searchedBooks:!prevState.query || !books === "empty query" ? [] : books,
       }))
     })
   }
