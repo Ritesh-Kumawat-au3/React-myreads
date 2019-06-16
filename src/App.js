@@ -30,14 +30,24 @@ class BrainFood extends Component {
   }
 
   render() {
-  	// Putting books in their corrosponding bookselves acccording to their state
-    let currentlyReading = this.state.books.filter((book) => {return book.shelf === 'currentlyReading'});
-    let wantToRead = this.state.books.filter((book) => {return book.shelf === 'wantToRead'});
-    let read = this.state.books.filter((book) => {return book.shelf === 'read'});
+
+    const shelves = [
+      {
+        type: 'currentlyReading',
+        name: 'Currently Reading'
+      },
+      {
+        type: 'wantToRead',
+        name: 'Want to Read'
+      },
+      {
+        type: 'read',
+        name: 'Read'
+      }
+    ]
 
     return (
       <div className="app">
-
       {
       /* React Router will render as following when the url path matches "/" exactly
       The Route component is a critical piece of building an application with React Router
@@ -57,18 +67,14 @@ class BrainFood extends Component {
               <img src={AppLogo} alt="BrainFood"/>
             </div>
             <div className="list-Of-books-content">
-              <ListOfBooks
-                books={currentlyReading}
-                nameOfTheShelf="Currently Reading"
-                changeTheShelf={this.changeTheShelf}/>
-              <ListOfBooks
-                books={wantToRead}
-                nameOfTheShelf="Want to Read"
-                changeTheShelf={this.changeTheShelf}/>
-              <ListOfBooks
-                books={read}
-                nameOfTheShelf="Read"
-                changeTheShelf={this.changeTheShelf}/>
+              { shelves.map( shelf => (
+                <ListOfBooks
+                  books={ this.state.books.filter( ( book ) => ( book.shelf === shelf.type )) }
+                  nameOfTheShelf={ shelf.name }
+                  changeTheShelf={ this.changeTheShelf }
+                />
+              ))
+            }
             </div>
             <div className="open-search">
               <Link to="/SearchBooks">Add a book</Link>
