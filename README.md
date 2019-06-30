@@ -5,8 +5,6 @@
 
 #The purpose of the project is to demonstrate understanding of the basic structure and operation of a React-based app.
 
-#The "MyReads: A Book Lending App" is A Project Developed for the final assessment project for Udacity's React NanoDegree Program.
-
 #In the "MyReads: A Book Lending App" Project, A bookshelf app named "BrainFood" is devloped that allows to select and categorize books in 3 catagories as follows:
 
 1)Have Read,
